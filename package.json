@@ -1,0 +1,17 @@
+{
+  "name": "rpa_mimic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "rebuild": "npm rebuild --runtime=electron --target=v8.0.1 --disturl=https://atom.io/download/atom-shell --abi=64"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.1.6",
+    "jimp": "^0.9.6",
+    "robotjs": "^0.6.0"
+  }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>RPA Mimic</title>
+  </head>
+  <body style="position: relative; top: 0; left: 0;">
+    <h2>RPA Mimic</h2>
+    <b>Mouse & Key Logger</b>
+
+    <div style="border: 1px solid #AAA;">
+      <h4>How to use</h4>
+      <div>「右矢印」で操作録画開始。もう一度押すと終了し、シーケンスデータがファイルに保存される。</div>
+      <div>「左矢印」：シーケンスデータをロードしてシーケンスを開始。</div>
+      <div>「上矢印」：シーケンスの正常動作確認用の部分スクリーンショットを撮影</div>
+      <div>「下矢印」：Automan終了。</div>
+      <div>「右クリック」：keyboard input</div>
+      <div>「Alt」：情報スクリーンショットの撮影のための短形の開始、終了。一度押すと開始し、もう一度押すと終了してスクリーンショット。</div>
+    </div>
+
+    <div>
+      keyboard input:<input type="text" id="keyboard_input_form" value="[keyword]"/>
+    </div>
+    <div>
+      sequence filename:<input type="text" id="filename_form" value="movedata.json"/>
+    </div>
+    <div>
+      sequence concat output:<input type="text" id="filename-seqcon-form" value="concat.json"/>
+      <button id="btn-seqcon">Concat</button>
+    </div>
+
+    <div id="mouse_cursor_log" style="height: 200px;overflow-y: scroll;">
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
