@@ -15,12 +15,16 @@ app.on('window-all-closed', () => {
 })
 
 const openMain = () => {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width,
+    height,
     webPreferences: {
       nodeIntegration: true,
     },
+    alwaysOnTop: true,
+    frame: false,
+    opacity: 1.0,
   })
   mainWindow.loadURL('file://' + __dirname + '/src/main/index.html')
   mainWindow.on('closed', () => {

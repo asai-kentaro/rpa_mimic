@@ -10,7 +10,7 @@ robot.setKeyboardDelay(8);
 const ManipulationSequencer = {
   startCbFunc: () => {},
   endCbFunc: () => {},
-  startSequenceMouseCursor: (manipulationLogs, start_cb, end_cb) => {
+  startSequenceMouseCursor: (manipulationLogs, start_cb = () => {}, end_cb = () => {}) => {
     ManipulationSequencer.startCbFunc = start_cb;
     ManipulationSequencer.endCbFunc = end_cb;
 

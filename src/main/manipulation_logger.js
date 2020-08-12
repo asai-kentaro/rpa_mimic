@@ -16,7 +16,7 @@ const ManipulationLogger = {
     const mouseCursorPosLoop = () => {
       if(ManipulationLogger.mousePosGetFlg) {
         const mouse = robot.getMousePos();
-        ManipulationLogger.posMouse(mouse.x, mouse.y)
+        ManipulationLogger.posMouse(mouse.x, mouse.y);
         writeLog("[mouse](" + mouse.x + "," + mouse.y + ")");
         setTimeout(mouseCursorPosLoop, 200);
       }
