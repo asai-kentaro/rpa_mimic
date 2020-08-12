@@ -39,6 +39,8 @@ ManipulationSequencer.startSequenceMouseCursor(man_insts);
 
 Also you can save manipulation with demonstration on the UI in our library.
 
+## Start Using
+
 ## Functions
 
 ### Manipulation Load

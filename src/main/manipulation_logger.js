@@ -11,8 +11,16 @@ const ManipulationLogger = {
   cursorLogs: [],
   mousePosGetFlg: false,
   savefileName: "",
-  startMouseCursorPos: (savefileName) => {
+  initialize: (savefileName) => {
+    ManipulationLogger.cursorLogs = [];
     ManipulationLogger.savefileName = savefileName;
+  },
+  finalize: () => {
+    ManipulationLogger.saveSequenceFile(ManipulationLogger.savefileName);
+    ManipulationLogger.cursorLogs = [];
+  },
+  startMouseCursorPos: (savefileName) => {
+    ManipulationLogger.initialize(savefileName);
     const mouseCursorPosLoop = () => {
       if(ManipulationLogger.mousePosGetFlg) {
         const mouse = robot.getMousePos();
@@ -24,8 +32,7 @@ const ManipulationLogger = {
     mouseCursorPosLoop();
   },
   endMouseCursorPos: () => {
-    ManipulationLogger.saveSequenceFile(ManipulationLogger.savefileName);
-    ManipulationLogger.cursorLogs = [];
+    ManipulationLogger.finalize();
   },
   posMouse: (x, y) => {
     ManipulationLogger.cursorLogs.push({type: "mouse", pos: {x,y}});
