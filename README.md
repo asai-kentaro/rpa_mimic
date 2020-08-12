@@ -9,6 +9,7 @@ RPA Mimic is for RPA with mouse and keyboard direct automated manipulation.
 You can easily automate sequential mouse and keyboard manipulations with below lines.
 
 ```
+# load manipulation sequencer
 const ManipulationSequencer = require('./manipulation_sequencer');
 # move mouse and click instructions
 const man_insts = [
@@ -30,6 +31,8 @@ const man_insts = [
     "type": "click"
   },
 ];
+
+# start manipulation
 ManipulationSequencer.startSequenceMouseCursor(man_insts);
 ```
 
@@ -44,6 +47,7 @@ You can make json instruction files with manipulation save function (next sectio
 
 ```
 const ManipulationSequencer = require('./manipulation_sequencer');
+
 ManipulationSequencer.startSequenceMouseCursor(manipulation_instructions);
 ```
 
@@ -54,6 +58,7 @@ You can save manipulations with demonstration on the UI such as moving mouse, cl
 
 ```
 const ManipulationLogger = require('./manipulation_logger');
+
 # save mouse cursor
 ManipulationLogger.posMouse(pos_x, pos_y);
 # save click
@@ -68,6 +73,7 @@ Json instruction file consists of sequential manipulations.
 You can specify below manipulation types.
 
 * move mouse cursor
+Move mouse cursor to (pos_x, pos_y).
 
 ```
 {
@@ -80,6 +86,7 @@ You can specify below manipulation types.
 ```
 
 * click
+Click mouse left button.
 
 ```
 {
@@ -88,6 +95,7 @@ You can specify below manipulation types.
 ```
 
 * type keys
+Type keys as "string".
 
 ```
 {
