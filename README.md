@@ -4,9 +4,12 @@ RPA Mimic is for RPA with mouse and keyboard direct automated manipulation.
 
 ## Demo
 
+[![Watch the video]](https://youtu.be/vt5fpE0bzSY)
+
 ## Features
 
 You can easily automate sequential mouse and keyboard manipulation with below lines.
+This library is based on robot.js.
 
 ```
 # load manipulation sequencer
@@ -74,8 +77,6 @@ You can specify below instruction types.
 
 * move mouse cursor
 
-Move mouse cursor to (pos_x, pos_y).
-
 ```
 {
   "type": "mouse",
@@ -83,28 +84,24 @@ Move mouse cursor to (pos_x, pos_y).
     "x": pos_x,
     "y": pos_y
   }
-},
+}
 ```
 
 * click
 
-Click mouse left button.
-
 ```
 {
   "type": "click"
-},
+}
 ```
 
 * type keys
-
-Type keys as "string".
 
 ```
 {
   "type": "keyboard",
   "string": "hello."
-},
+}
 ```
 
 ## Development
