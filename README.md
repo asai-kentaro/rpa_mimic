@@ -6,7 +6,7 @@ RPA Mimic is for RPA with mouse and keyboard direct automated manipulation.
 
 ## Features
 
-You can easily automate sequential mouse and keyboard manipulations with below lines.
+You can easily automate sequential mouse and keyboard manipulation with below lines.
 
 ```
 # load manipulation sequencer
@@ -36,11 +36,11 @@ const man_insts = [
 ManipulationSequencer.startSequenceMouseCursor(man_insts);
 ```
 
-Also you can save manipulations with demonstration on the UI in our library.
+Also you can save manipulation with demonstration on the UI in our library.
 
 ## Functions
 
-### Manipulation load
+### Manipulation Load
 
 Manipulation load function allows the user to move mouse cursor, click on display and type keys automatically with json instruction files.
 You can make json instruction files with manipulation save function (next section).
@@ -51,10 +51,10 @@ const ManipulationSequencer = require('./manipulation_sequencer');
 ManipulationSequencer.startSequenceMouseCursor(manipulation_instructions);
 ```
 
-### Manipulation save
+### Manipulation Save
 
-Manipulation save function is for saving sequential manipulations.
-You can save manipulations with demonstration on the UI such as moving mouse, click buttons and type keys.
+Manipulation save function is for saving sequential instructions.
+You can save instructions with demonstration on the UI such as moving mouse, click buttons and type keys.
 
 ```
 const ManipulationLogger = require('./manipulation_logger');
@@ -67,12 +67,13 @@ ManipulationLogger.clickMouse();
 ManipulationLogger.typeKeyboard("hello.");
 ```
 
-## Json instruction file
+## Json Instruction File
 
-Json instruction file consists of sequential manipulations.
-You can specify below manipulation types.
+Json instruction file consists of sequential instructions.
+You can specify below instruction types.
 
 * move mouse cursor
+
 Move mouse cursor to (pos_x, pos_y).
 
 ```
@@ -86,6 +87,7 @@ Move mouse cursor to (pos_x, pos_y).
 ```
 
 * click
+
 Click mouse left button.
 
 ```
@@ -95,6 +97,7 @@ Click mouse left button.
 ```
 
 * type keys
+
 Type keys as "string".
 
 ```
