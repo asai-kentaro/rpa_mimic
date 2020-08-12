@@ -4,7 +4,7 @@ RPA Mimic is for RPA with mouse and keyboard direct automated manipulation.
 
 ## Demo
 
-[![Watch the video]](https://youtu.be/vt5fpE0bzSY)
+[![Watch the video](https://github.com/asai-kentaro/rpa_mimic/blob/master/docs/video/automation_example_video_theme.png)](https://github.com/asai-kentaro/rpa_mimic/blob/master/docs/video/automation_example_video.mov)
 
 ## Features
 
