@@ -12,7 +12,7 @@ This library is based on robot.js.
 ```
 # load manipulation sequencer
 const ManipulationSequencer = require('./manipulation_sequencer');
-# move mouse and click instructions
+# move mouse cursor and click instructions
 const man_insts = [
   {
     "type": "mouse",
@@ -45,8 +45,8 @@ Also you can save manipulation with demonstration on the UI in our library.
 
 ### Manipulation Load
 
-Manipulation load function allows the user to move mouse cursor, click on display and type keys automatically with json instruction files.
-You can make json instruction files with manipulation save function (next section).
+With Manipulation load function, you can move mouse cursor, click and type keys automatically with json instruction files.
+You can make json instruction files with manipulation simulator (next section).
 
 ```
 const ManipulationSequencer = require('./manipulation_sequencer');
@@ -56,7 +56,7 @@ ManipulationSequencer.startSequenceMouseCursor(manipulation_instructions);
 
 ### Manipulation Save
 
-Manipulation save function is for saving sequential instructions.
+Manipulation simulator is used for saving sequential instructions.
 You can save instructions with demonstration on the UI such as moving mouse, click buttons and type keys.
 
 ```

@@ -43,6 +43,42 @@ const ManipulationLogger = {
   typeKeyboard: (text_value) => {
     ManipulationLogger.cursorLogs.push({type: "keyboard", string: text_value});
   },
+  saveScreen: (name, x, y, w, h, cb = () => {}) => {
+    const bitmap = robot.screen.capture();
+    let img_data = bitmap.image;
+    let window_size = [document.documentElement.clientWidth,document.documentElement.clientHeight];
+    let img_size = [bitmap.width,bitmap.height];
+    let screen_y_offset = 0;
+    x = x * (img_size[0] / window_size[0]);
+    y = y * (img_size[1] / window_size[1]) + screen_y_offset;
+    w = w * (img_size[0] / window_size[0]);
+    h = h * (img_size[0] / window_size[0]);
+    for(let i=0;i<img_data.length;i += 4) {
+      let tmp = img_data[i];
+      img_data[i] = img_data[i+2];
+      img_data[i+2] = tmp;
+    }
+    bitmap.data = img_data;
+    fileUtil.saveImage("./data/img/" + name + ".png", bitmap, {x:x,y:y,w:w,h:h}, (image) => {
+      cb(image)
+    });
+  },
+  captureScreen: () => {
+    const getDateString = () => {
+      const date = new Date();
+      let date_str = "";
+      date_str += date.getFullYear();
+      date_str += (date.getMonth() + 1);
+      date_str += date.getDate();
+      date_str += date.getHours();
+      date_str += date.getMinutes();
+      date_str += date.getSeconds();
+      return date_str;
+    }
+
+    const mouse = robot.getMousePos();
+    ManipulationLogger.saveScreen("capture_" + getDateString(), mouse.x, mouse.y, 200,200);
+  },
 
   loadSequenceFile: (filenames, cb, meta = {}) => {
     let filename_ary = filenames.split(",");

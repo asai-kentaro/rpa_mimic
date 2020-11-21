@@ -61,6 +61,9 @@ document.addEventListener('keydown', (event) => {
     const filename = document.getElementById("filename_form").value;
     ManipulationLogger.loadSequenceFile(filename, () => { ManipulationSequencer.startSequenceMouseCursor(ManipulationLogger.cursorLogs, setWindowTransparent, setWindowSolid) });
   }
+  if(keyName == "ArrowUp") {
+    ManipulationLogger.captureScreen();
+  }
   if(keyName == "ArrowDown") {
     mainWindow.close();
   }
