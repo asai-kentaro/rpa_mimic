@@ -9,6 +9,11 @@ const robot = require("robotjs");
 robot.setMouseDelay(30);
 robot.setKeyboardDelay(8);
 
+const $ = require("jquery");
+const imagesLoaded = require("imagesloaded");
+
+const fileUtil = remote.require('./src/lib/file_util');
+
 const ManipulationSequencer = require('./manipulation_sequencer');
 const ManipulationLogger = require('./manipulation_logger');
 
@@ -33,6 +38,19 @@ const setWindowSolid = () => {
   mainWindow.setOpacity(1.0);
 }
 
+const setImageList = () => {
+  fileUtil.listFiles("img/", (img_files) => {
+    let img_list_html = "";
+    img_files.forEach((filename) => {
+      img_list_html += '<div><h5>' + filename + '</h5><img src="../../' + filename + '" /></div>'
+    })
+    $("#images_container").html(img_list_html);
+    imagesLoaded($("#images_container"));
+  });
+};
+
+
+$(document).ready(setImageList);
 
 // mouse left-click => save left-click
 document.onclick = () => {

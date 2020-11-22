@@ -14,6 +14,20 @@ const fileUtil = {
       }
     });
   },
+  listFiles: (dir, cb) => {
+    fs.readdir(base_dir + dir, (err, files) => {
+      if(err) throw err;
+      let fileList = [];
+      files.filter((file) => {
+        let filename = base_dir + dir + file;
+        return fs.statSync(filename).isFile();
+      }).forEach((file) => {
+        let filename = base_dir + dir + file;
+        fileList.push(filename);
+      })
+      cb(fileList);
+    })
+  },
   listJsonFiles: (dir, cb) => {
     fs.readdir(base_dir + dir, (err, files) => {
       if(err) throw err;

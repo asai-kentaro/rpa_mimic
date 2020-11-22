@@ -111,7 +111,11 @@ You can specify below instruction types.
 ```
 {
   "type": "capture_image",
-  "image_name": "myimage"
+  "image_name": "myimage",
+  "x": 1000,
+  "y": 800,
+  "w": 200,
+  "h": 200
 }
 ```
 
