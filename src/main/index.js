@@ -5,6 +5,10 @@ const remote = electron.remote;
 const ipcRenderer = electron.ipcRenderer;
 const mainWindow = remote.getCurrentWindow();
 
+const robot = require("robotjs");
+robot.setMouseDelay(30);
+robot.setKeyboardDelay(8);
+
 const ManipulationSequencer = require('./manipulation_sequencer');
 const ManipulationLogger = require('./manipulation_logger');
 

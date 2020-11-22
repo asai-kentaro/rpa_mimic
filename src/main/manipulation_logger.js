@@ -1,8 +1,7 @@
 const robot = require("robotjs");
-robot.setMouseDelay(30);
-robot.setKeyboardDelay(8);
 
 const fileUtil = remote.require('./src/lib/file_util');
+const imageUtil = remote.require('./src/lib/image_util');
 
 //
 // 操作を記録、読み込み、保存する
@@ -34,33 +33,10 @@ const ManipulationLogger = {
   endMouseCursorPos: () => {
     ManipulationLogger.finalize();
   },
-  posMouse: (x, y) => {
-    ManipulationLogger.cursorLogs.push({type: "mouse", pos: {x,y}});
-  },
-  clickMouse: () => {
-    ManipulationLogger.cursorLogs.push({type: "click"});
-  },
-  typeKeyboard: (text_value) => {
-    ManipulationLogger.cursorLogs.push({type: "keyboard", string: text_value});
-  },
   saveScreen: (name, x, y, w, h, cb = () => {}) => {
-    const bitmap = robot.screen.capture();
-    let img_data = bitmap.image;
-    let window_size = [document.documentElement.clientWidth,document.documentElement.clientHeight];
-    let img_size = [bitmap.width,bitmap.height];
-    let screen_y_offset = 0;
-    x = x * (img_size[0] / window_size[0]);
-    y = y * (img_size[1] / window_size[1]) + screen_y_offset;
-    w = w * (img_size[0] / window_size[0]);
-    h = h * (img_size[0] / window_size[0]);
-    for(let i=0;i<img_data.length;i += 4) {
-      let tmp = img_data[i];
-      img_data[i] = img_data[i+2];
-      img_data[i+2] = tmp;
-    }
-    bitmap.data = img_data;
-    fileUtil.saveImage("./data/img/" + name + ".png", bitmap, {x:x,y:y,w:w,h:h}, (image) => {
-      cb(image)
+    const window_size = [document.documentElement.clientWidth,document.documentElement.clientHeight];
+    imageUtil.getScreenImage(x,y,w,h,window_size, (bitmap) => {
+      fileUtil.saveImage("./data/img/" + name + ".png", bitmap, {x:x,y:y,w:w,h:h}).then(cb);
     });
   },
   captureScreen: () => {
@@ -77,7 +53,22 @@ const ManipulationLogger = {
     }
 
     const mouse = robot.getMousePos();
-    ManipulationLogger.saveScreen("capture_" + getDateString(), mouse.x, mouse.y, 200,200);
+    const image_name = "capture_" + getDateString();
+    const x = mouse.x, y = mouse.y, w = 200, h = 200;
+    ManipulationLogger.saveScreen(image_name, x, y, w, h);
+    ManipulationLogger.captureImage(image_name, x, y, w, h);
+  },
+  posMouse: (x, y) => {
+    ManipulationLogger.cursorLogs.push({type: "mouse", pos: {x,y}});
+  },
+  clickMouse: () => {
+    ManipulationLogger.cursorLogs.push({type: "click"});
+  },
+  typeKeyboard: (text_value) => {
+    ManipulationLogger.cursorLogs.push({type: "keyboard", string: text_value});
+  },
+  captureImage: (image_name, x, y, w, h) => {
+    ManipulationLogger.cursorLogs.push({type: "capture_image", image_name, x, y, w, h});
   },
 
   loadSequenceFile: (filenames, cb, meta = {}) => {

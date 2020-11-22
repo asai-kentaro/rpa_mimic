@@ -68,6 +68,8 @@ ManipulationLogger.posMouse(pos_x, pos_y);
 ManipulationLogger.clickMouse();
 # type keys
 ManipulationLogger.typeKeyboard("hello.");
+# capture screen
+ManipulationLogger.captureScreen();
 ```
 
 ## Json Instruction File
@@ -101,6 +103,15 @@ You can specify below instruction types.
 {
   "type": "keyboard",
   "string": "hello."
+}
+```
+
+* capture screen
+
+```
+{
+  "type": "capture_image",
+  "image_name": "myimage"
 }
 ```
 

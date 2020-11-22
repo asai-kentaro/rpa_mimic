@@ -1,11 +1,10 @@
 const robot = require("robotjs");
-robot.setMouseDelay(30);
-robot.setKeyboardDelay(8);
+
+const fileUtil = remote.require('./src/lib/file_util');
+const imageUtil = remote.require('./src/lib/image_util');
 
 //
 // 操作を再生する
-//
-// input: manipulation_json_ary
 //
 const ManipulationSequencer = {
   startCbFunc: () => {},
@@ -27,11 +26,17 @@ const ManipulationSequencer = {
     };
     let nextOrder = manipulationLogs[1];
     manipulationLogs.shift();
+
+    const nextStep = () => {
+      ManipulationSequencer.sequenceMouseCursor(manipulationLogs);
+    };
     if(nextOrder.type == "mouse") {
       robot.moveMouseSmooth(nextOrder.pos.x,nextOrder.pos.y);
+      nextStep();
     }
     if(nextOrder.type == "click") {
       robot.mouseClick();
+      nextStep();
     }
     if(nextOrder.type == "keyboard") {
       const pressBacks = (count) => {
@@ -43,8 +48,26 @@ const ManipulationSequencer = {
       pressBacks(10);
       robot.typeString(nextOrder.string);
       robot.keyTap("enter");
+      nextStep();
     }
-    ManipulationSequencer.sequenceMouseCursor(manipulationLogs);
+    if(nextOrder.type == "capture_image") {
+      const img_file = "./data/img/" + nextOrder.image_name + ".png";
+      const checkimgname = nextOrder.image_name + "_check";
+      fileUtil.loadImage(img_file, (loadCapImg) => {
+        const mouse = robot.getMousePos();
+        const window_size = [document.documentElement.clientWidth,document.documentElement.clientHeight];
+        const x = mouse.x, y = mouse.y, w = 200, h = 200;
+        imageUtil.getScreenImage(x, y, w, h, window_size, (currentBitmap) => {
+          fileUtil.saveImage("./data/img/" + checkimgname + ".png", currentBitmap, {x:x,y:y,w:w,h:h}).then((currentCapImg) => {
+            const isSameImg = imageUtil.bitmapChecker(loadCapImg.bitmap, currentCapImg.bitmap);
+            console.log(isSameImg);
+            nextStep();
+          });
+        });
+      }, (err) => {
+        console.log(err);
+      })
+    }
   },
 }
 

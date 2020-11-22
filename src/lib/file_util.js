@@ -36,17 +36,10 @@ const fileUtil = {
       err(e);
     })
   },
-  saveImage: (file_name, bitmap, meta, cb) => {
-    jimp.read(bitmap).then(image => {
-      image.crop(meta.x,meta.y,meta.w,meta.h).write(file_name);
-      cb(image);
-    })
-    .catch(err => {
-      console.log("[Error] Image save");
-      cb({
-        result: "error",
-      });
-    });
+  saveImage: async (file_name, bitmap, meta) => {
+    let image = await jimp.read(bitmap);
+    image.crop(meta.x,meta.y,meta.w,meta.h).write(file_name);
+    return image;
   },
 }
 
