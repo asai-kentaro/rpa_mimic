@@ -10,7 +10,6 @@ robot.setMouseDelay(30);
 robot.setKeyboardDelay(8);
 
 const $ = require("jquery");
-const imagesLoaded = require("imagesloaded");
 
 const fileUtil = remote.require('./src/lib/file_util');
 
@@ -45,7 +44,6 @@ const setImageList = () => {
       img_list_html += '<div><h5>' + filename + '</h5><img src="../../' + filename + '" /></div>'
     })
     $("#images_container").html(img_list_html);
-    imagesLoaded($("#images_container"));
   });
 };
 
