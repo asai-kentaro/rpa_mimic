@@ -19,6 +19,7 @@ const ManipulationLogger = require('./manipulation_logger');
 
 const seqConForm = document.getElementById("filename-seqcon-form");
 const seqConBtn = document.getElementById("btn-seqcon");
+const loadSeqBtn = document.getElementById("btn-loadseq");
 
 
 const writeLog = (text) => {
@@ -46,6 +47,24 @@ const setImageList = () => {
     $("#images_container").html(img_list_html);
   });
 };
+const loadSequence = () => {
+  const getStepColor = (type) => {
+    if(type == "mouse") return "#FAA";
+    if(type == "keyboard") return "#AFA";
+    if(type == "click") return "#AAF";
+    if(type == "capture_image") return "#FAF";
+    return "#DDD";
+  };
+  const filename = document.getElementById("filename_form").value;
+  ManipulationLogger.loadSequenceFile(filename, () => {
+    let seq_list_html = "";
+    for(let i=0;i<ManipulationLogger.cursorLogs.length;i++) {
+      let type = ManipulationLogger.cursorLogs[i].type;
+      seq_list_html += '<li class="seq-step-elm" style="background:' + getStepColor(type) + '">' + type + '</li>';
+    }
+    $("#seq_container").html(seq_list_html);
+  });
+}
 
 
 $(document).ready(setImageList);
@@ -88,5 +107,9 @@ document.addEventListener('keydown', (event) => {
     mainWindow.close();
   }
 });
+
+seqConBtn.addEventListener('click', () => {});
+
+loadSeqBtn.addEventListener('click', loadSequence);
 
 ManipulationLogger.listSequenceFiles();

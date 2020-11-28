@@ -7,7 +7,4 @@ MANIFEST
 docs/_build/
 docs/locale/
 node_modules/
-tests/coverage_html/
-tests/.coverage
-build/
-tests/report/
+data/
